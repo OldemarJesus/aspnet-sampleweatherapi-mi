@@ -23,7 +23,8 @@ public class HomeController : Controller
         if (!response.IsSuccessStatusCode)
         {
             _logger.LogError("Failed to load weather data from SampleWeatherApi.");
-            return View("Error");
+            ViewBag.WeatherData = $"Error loading weather data. Status code: {response.StatusCode}";
+            return View();
         }
 
         var weatherData = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
